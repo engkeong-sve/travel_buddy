@@ -1,0 +1,58 @@
+from google.adk.tools import ToolContext
+import serpapi
+from serpapi import GoogleSearch
+import os
+
+def search_hotel(location: str, check_in_date: str, check_out_date: str,
+                  adults: int, children: int, rooms: int, tool_context: ToolContext): #, min_price: int, max_price: int):
+    '''
+    Find hotels using the Google Hotels engine.
+    
+    Args:
+        location (str): The location of the hotel.
+        check_in_date (str): Check-in date. The format is YYYY-MM-DD. e.g. 2024-06-22
+        check_out_date (str): Check-out date. The format is YYYY-MM-DD. e.g. 2024-06-28
+        adults (int): Number of adults staying in the hotel, default as 2 if not specified.
+        children (int): Number of children staying in the hotel, default as 0 if not specified.
+        rooms (int): Number of rooms required, default as 1 if not specified.
+        
+    Returns:
+        dict: Hotel search results.
+    '''
+    # --min_price (int): User-defined acceptable minimum price of the hotel. Default as None if not specified.
+    # --max_price (int): User-defined acceptable maximum price of the hotel. Default as None if not specified.
+
+
+    params = {
+        'api_key': os.environ.get('SERPAPI_API_KEY'),
+        'engine': 'google_hotels',
+        'hl': 'en',
+        'gl': 'us',
+        'q': location,
+        'check_in_date': check_in_date,
+        'check_out_date': check_out_date,
+        'currency': 'USD',
+        'adults': adults,
+        'children': children,
+        'rooms': rooms,
+        'sort_by': 8,
+        'hotel_class': None,
+        # 'min_price': min_price,
+        # 'max_price': max_price,
+    }
+
+    # search = serpapi.search(params)
+    # results = search.data
+    try:
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        tool_context.state["hotel_search_list"] = results['properties'][:5]
+        return {
+            'status': 'success',
+            'hotel_list': results['properties'][:5],
+        }
+    except Exception as e:
+        return {
+                'status': 'failed',
+                'error_msg': e,
+            }
