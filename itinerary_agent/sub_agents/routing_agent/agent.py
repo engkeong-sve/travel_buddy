@@ -6,10 +6,10 @@ from . import prompt
 
 
 
-restaurant_finding = Agent(
-    name="restaurant_finding",
+routing_agent = Agent(
+    name="routing_agent",
     model="gemini-2.0-flash",
-    description="Restaurant Finding Agent",
-    instruction=prompt.RESTAURANT_FINDING_PROMPT,
+    description="Search for optimal route agent",
+    instruction=prompt.ROUTING_AGENT_PROMPT,
     tools = [google_search],
 )

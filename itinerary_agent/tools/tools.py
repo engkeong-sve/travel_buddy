@@ -2,6 +2,14 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from datetime import datetime
+
+
+def get_current_datetime():
+    now = datetime.now()
+    return now.strftime("%Y-%m-%d %H:%M:%S")
+
+
 
 def send_email(to_email: str, subject: str, html_body: str) -> bool:
     """

@@ -6,10 +6,10 @@ from . import prompt
 
 
 
-plan_by_template = Agent(
-    name="plan_by_template",
+template_agent = Agent(
+    name="template_agent",
     model="gemini-2.0-flash",
-    description="Plan by Template Agent",
-    instruction=prompt.PLAN_BY_TEMPLATE_PROMPT,
+    description="Find available travel template online agent",
+    instruction=prompt.TEMPLATE_AGENT_PROMPT,
     tools = [google_search],
 )

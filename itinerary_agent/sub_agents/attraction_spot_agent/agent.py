@@ -6,10 +6,10 @@ from . import prompt
 
 
 
-attraction_spot = Agent(
-    name="attraction_spot",
+attraction_spot_agent = Agent(
+    name="attraction_spot_agent",
     model="gemini-2.0-flash",
-    description="Attraction Spot Agent",
+    description="Search for top attraction spots agent",
     instruction=prompt.ATTRACTION_SPOT_PROMPT,
     tools = [google_search],
 )

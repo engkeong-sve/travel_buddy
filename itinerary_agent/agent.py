@@ -6,12 +6,12 @@ from google.adk.agents.llm_agent import Agent
 from google.adk.tools.agent_tool import AgentTool
 
 from . import prompt
-from .sub_agents.attraction_spot.agent import attraction_spot
-from .sub_agents.restaurant_finding.agent import restaurant_finding
-from .sub_agents.routing.agent import routing
-from .sub_agents.plan_by_template.agent import plan_by_template
-from .sub_agents.weather.agent import weather
-from .tools.tools import send_email
+from .sub_agents.attraction_spot_agent.agent import attraction_spot_agent
+from .sub_agents.restaurant_agent.agent import restaurant_agent
+from .sub_agents.routing_agent.agent import routing_agent
+from .sub_agents.template_agent.agent import template_agent
+from .sub_agents.weather_agent.agent import weather_agent
+from .tools.tools import send_email, get_current_datetime
 
 
 
@@ -21,10 +21,11 @@ root_agent = Agent(
     model="gemini-2.0-flash",
     description="Creates a travel itinerary based on user preferences",
     instruction=prompt.MANAGER_AGENT_PROMPT,
-    tools=[AgentTool(attraction_spot),
-           AgentTool(restaurant_finding),
-           AgentTool(routing),
-           AgentTool(plan_by_template),
-           AgentTool(weather),
-           send_email],
+    tools=[AgentTool(attraction_spot_agent),
+           AgentTool(restaurant_agent),
+           AgentTool(routing_agent),
+           AgentTool(template_agent),
+           AgentTool(weather_agent),
+           send_email,
+           get_current_datetime],
 )
