@@ -43,6 +43,7 @@ root_agent = Agent(
     description='Root Agent',
     instruction='''
     You are a root agent that is able to use different agent tools to perform the necessary functions required by user.
+    You can access to the context state to get more info and reply to the users. 
     ''',
     tools=[AgentTool(agent=hotel_agent), AgentTool(agent=joke_agent)]
 )
