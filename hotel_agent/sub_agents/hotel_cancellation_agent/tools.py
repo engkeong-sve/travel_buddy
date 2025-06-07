@@ -1,5 +1,6 @@
 from google.adk.tools import ToolContext
 import datetime
+import json
 
 def cancel_hotel_booking(tool_context: ToolContext):
     """
@@ -8,13 +9,15 @@ def cancel_hotel_booking(tool_context: ToolContext):
 
     current_time = datetime.datetime.now()
 
+    current_time_str = current_time.strftime("%Y-%m-%d %H:%M:%S")
+
     tool_context.state['hotel_booking_list'] = {}
     
     return {
         "status": "success",
         "message": "Successfully removed Hotel booking",
         "hotel_details": "",
-        "timestamp": current_time,
+        "timestamp": current_time_str,
     }
 
 # def modify_hotel_details(tool_context: ToolContext):

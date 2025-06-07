@@ -20,7 +20,6 @@ hotel_cancellation_agent = Agent(
     
     Else, if the user has a booking, use the following tools according to the user's requests:
     - cancel_hotel_booking
-    - modify_hotel_details
     ''',
     tools=[cancel_hotel_booking], #, modify_hotel_details],
 )
