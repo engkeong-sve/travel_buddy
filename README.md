@@ -24,5 +24,10 @@ TravelBuddy is your smart, AI-powered travel assistant that helps you plan, orga
 ```bash
 git clone https://github.com/engkeong-sve/travel_buddy.git
 cd travel_buddy
+
 # Install dependencies
 pip install -r requirements.txt
+
+# Run agent with adk web
+adk web
+
