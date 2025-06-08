@@ -1,3 +1,2 @@
-crawl4ai
 google-search-results
 google-adk
