@@ -6,7 +6,8 @@ from google.adk.agents.llm_agent import Agent
 from google.adk.tools.agent_tool import AgentTool
 
 from . import prompt
-from hotel_agent.agent import hotel_agent
+from .sub_agents.flight_search_agent.agent import flight_search_agent
+from .sub_agents.hotel_search_agent.agent import hotel_search_agent
 from .sub_agents.attraction_spot_agent.agent import attraction_spot_agent
 from .sub_agents.restaurant_agent.agent import restaurant_agent
 from .sub_agents.routing_agent.agent import routing_agent
@@ -22,7 +23,8 @@ root_agent = Agent(
     model="gemini-2.0-flash",
     description="Creates a travel itinerary based on user preferences",
     instruction=prompt.MANAGER_AGENT_PROMPT,
-    tools=[AgentTool(hotel_agent),
+    tools=[AgentTool(hotel_search_agent),
+           AgentTool(flight_search_agent),
            AgentTool(attraction_spot_agent),
            AgentTool(restaurant_agent),
            AgentTool(routing_agent),
