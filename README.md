@@ -19,13 +19,6 @@ TravelBuddy is your smart, AI-powered travel assistant that helps you plan, orga
 
 ## 🚀 Getting Started
 
-### Prerequisites
-
-[TODO]
-- Node.js / Python (depending on your tech stack)
-- Yarn / npm / pip
-- [Other setup tools or dependencies]
-
 ### Installation
 
 ```bash
