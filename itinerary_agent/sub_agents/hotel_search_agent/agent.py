@@ -1,5 +1,4 @@
 from google.adk import Agent
-from dotenv import load_dotenv
 import datetime
 from .tools import search_hotel
 
