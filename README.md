@@ -22,7 +22,7 @@ TravelBuddy is your smart, AI-powered travel assistant that helps you plan, orga
 ### Add .env file under root directory
 ```.env
 GOOGLE_GENAI_USE_VERTEXAI=FALSE
-LM_MODEL=gemini-2.0-flash
+LLM_MODEL=gemini-2.0-flash
 GOOGLE_API_KEY=<YOUR_GOOGLE_API_KEY>
 SERPAPI_API_KEY=<YOUR_SERPAPI_API_KEY>
 ```
