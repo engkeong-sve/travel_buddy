@@ -17,7 +17,22 @@ hotel_agent = Agent(
     When performing hotel searching, please ensure that the dates are in future, not the past.
      
     You can use the following tools:
-    - hotel_search
+    - hotel_search: Search for hotels based on user criteria using the Google Hotels API.
+
+    **Key Constraints**:
+    - Response hotel information with Output Format.
+    
+    **Output Format**:
+        - Hotel name
+        - Address
+        - Check-in date and time
+        - Check-out date and time
+        - Number of rooms
+        - Number of guests (adults, children)
+        - Room type (e.g., single, double, suite)
+        - Price per night (breakdown by adults and children)
+        - Total cost for the stay
+        - Booking URL (if available)
     """,
     tools=[hotel_search],
 )
