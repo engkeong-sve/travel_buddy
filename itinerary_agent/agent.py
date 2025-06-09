@@ -1,7 +1,7 @@
 """
 Agent module for managing itinerary generation using Google ADK tools.
 """
-
+import os
 from google.adk.agents.llm_agent import Agent
 from google.adk.tools.agent_tool import AgentTool
 
@@ -17,11 +17,9 @@ from .tools.tools import send_email, get_current_datetime, add_user_todo_item, r
     get_user_todo_list
 
 
-
-# Itinerary Agent
 root_agent = Agent(
     name="manager",
-    model="gemini-2.0-flash",
+    model=os.environ.get('LLM_MODEL'),
     description="Creates a travel itinerary based on user preferences",
     instruction=prompt.MANAGER_AGENT_PROMPT,
     tools=[

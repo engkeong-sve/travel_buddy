@@ -1,16 +1,14 @@
 
 """Agent module for searching available flights based on user queries."""
-
+import os
 import datetime
 from google.adk import Agent
 from .tools import flight_search
 
 
-MODEL = "gemini-2.0-flash"
-
 flight_agent = Agent(
     name="flight_agent",
-    model=MODEL,
+    model=os.environ.get('LLM_MODEL'),
     description="Flight agent for finding available flights based on user queries.",
     instruction=f"""You are a helpful travel assistant who can help to check on the exact flight for the user.
     You can check with users if the details are not sufficient to find a flight.

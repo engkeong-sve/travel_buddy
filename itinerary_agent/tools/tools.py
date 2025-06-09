@@ -5,6 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 from google.adk.tools import ToolContext
 
+
 def get_current_datetime():
     now = datetime.now()
     return now.strftime("%Y-%m-%d %H:%M:%S")

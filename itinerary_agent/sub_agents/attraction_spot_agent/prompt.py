@@ -44,5 +44,3 @@ Return 5 to 10 top-rated and varied attractions. Each attraction should be forma
 End with this line:
 “Results retrieved using Google Maps Places API for location: <location>”
 """
-
-
