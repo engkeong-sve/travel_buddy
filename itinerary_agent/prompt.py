@@ -111,7 +111,7 @@ If the email fails, respond:
 
 
 ## Output Format
-Present a clear, in markdown format, structured itinerary for each day, with emoji and including:
+Present a clear, structured itinerary for each day, with emoji and including:
 
 **Day 2 – Taipei**
 - ☀️ Weather: Sunny  
