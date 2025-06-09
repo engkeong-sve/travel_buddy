@@ -19,7 +19,15 @@ TravelBuddy is your smart, AI-powered travel assistant that helps you plan, orga
 
 ## 🚀 Getting Started
 
-### Installation
+### Add .env file under root directory
+```.env
+GOOGLE_GENAI_USE_VERTEXAI=FALSE
+LM_MODEL=gemini-2.0-flash
+GOOGLE_API_KEY=<YOUR_GOOGLE_API_KEY>
+SERPAPI_API_KEY=<YOUR_SERPAPI_API_KEY>
+```
+
+### Install Requirements
 
 ```bash
 git clone https://github.com/engkeong-sve/travel_buddy.git
@@ -30,4 +38,4 @@ pip install -r requirements.txt
 
 # Run agent with adk web
 adk web
-
+```
