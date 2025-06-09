@@ -2,13 +2,10 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from datetime import datetime
+import datetime
 from google.adk.tools import ToolContext
 
 
-def get_current_datetime():
-    now = datetime.now()
-    return now.strftime("%Y-%m-%d %H:%M:%S")
 
 def send_email(to_email: str, subject: str, html_body: str) -> bool:
     """
@@ -68,7 +65,7 @@ def add_user_todo_item(todo_title: str, todo_item: str, tool_context: ToolContex
         tool_context.state['todo_list'].append({
             'title': todo_title,
             'item': todo_item,
-            'timestamp': get_current_datetime()
+            'timestamp': datetime.datetime.now()
         })
         print("✅ Todo item added successfully.")
         return True

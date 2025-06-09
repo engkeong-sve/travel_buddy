@@ -13,7 +13,7 @@ from .sub_agents.restaurant_agent.agent import restaurant_agent
 from .sub_agents.routing_agent.agent import routing_agent
 from .sub_agents.template_agent.agent import template_agent
 from .sub_agents.weather_agent.agent import weather_agent
-from .tools.tools import send_email, get_current_datetime, add_user_todo_item, remove_user_todo_item, \
+from .tools.tools import send_email, add_user_todo_item, remove_user_todo_item, \
     get_user_todo_list
 
 
@@ -31,7 +31,6 @@ root_agent = Agent(
         AgentTool(template_agent),
         AgentTool(weather_agent),
         send_email,
-        get_current_datetime,
         add_user_todo_item,
         remove_user_todo_item,
         get_user_todo_list,
