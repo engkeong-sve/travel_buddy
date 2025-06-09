@@ -3,14 +3,15 @@
 
 import datetime
 from google.adk import Agent
-from .tools import search_flight
+from .tools import flight_search
+
 
 MODEL = "gemini-2.0-flash"
 
-flight_search_agent = Agent(
-    name="flight_search_agent",
+flight_agent = Agent(
+    name="flight_agent",
     model=MODEL,
-    description="Flight search agent for finding available flights based on user queries.",
+    description="Flight agent for finding available flights based on user queries.",
     instruction=f"""You are a helpful travel assistant who can help to check on the exact flight for the user.
     You can check with users if the details are not sufficient to find a flight.
     You must strictly follow the Key Constraints and Output Format provided below.
@@ -19,7 +20,7 @@ flight_search_agent = Agent(
     When performing flight searching, please ensure that the dates are in future, not the past.
     
     You can use the following tools:
-    - search_flight: Search for flights based on user criteria using the Google Flights API.
+    - flight_search: Search for flights based on user criteria using the Google Flights API.
     
     **Key Constraints**:
     - Response flights information with Output Format.
@@ -37,5 +38,5 @@ flight_search_agent = Agent(
         - Price (breakdown by adults and children)
         - Total cost
     """,
-    tools=[search_flight]
+    tools=[flight_search]
 )

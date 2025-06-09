@@ -54,4 +54,3 @@ Return a clear, structured itinerary:
   - City/location transitions (if any)
 - Include links or references to any itinerary or post used for inspiration
 """
-

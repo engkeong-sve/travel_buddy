@@ -35,4 +35,3 @@ Pass daily weather tags to the **manager**, such as:
 - "Rain expected – flexible plans advised"
 
 """
-

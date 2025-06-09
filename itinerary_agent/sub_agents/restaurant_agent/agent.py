@@ -4,8 +4,6 @@ from google.adk.tools import google_search
 from . import prompt
 
 
-
-
 restaurant_agent = Agent(
     name="restaurant_agent",
     model="gemini-2.0-flash",

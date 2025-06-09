@@ -1,10 +1,10 @@
 from google.adk import Agent
 import datetime
-from .tools import search_hotel
+from .tools import hotel_search
 
 
-hotel_search_agent = Agent(
-    name="hotel_search_agent",
+hotel_agent = Agent(
+    name="hotel_agent",
     model="gemini-2.0-flash",
     description="Tool agent",
     instruction=f"""
@@ -15,8 +15,8 @@ hotel_search_agent = Agent(
     When performing hotel searching, please ensure that the dates are in future, not the past.
      
     You can use the following tools:
-    - search_hotel
+    - hotel_search
 
     """,
-    tools=[search_hotel],
+    tools=[hotel_search],
 )

@@ -3,7 +3,7 @@ import os
 from serpapi import GoogleSearch
 from google.adk.tools import ToolContext
 
-def search_flight(
+def flight_search(
     departure_id: str,
     arrival_id: str,
     outbound_date: str,

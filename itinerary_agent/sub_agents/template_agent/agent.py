@@ -4,8 +4,6 @@ from google.adk.tools import google_search
 from . import prompt
 
 
-
-
 template_agent = Agent(
     name="template_agent",
     model="gemini-2.0-flash",

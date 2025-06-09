@@ -62,4 +62,3 @@ Return 5 to 10 recommended restaurants, each formatted like this:
 Close your response with:
 “Restaurant results retrieved using Google Maps Places API and enhanced with Google Search for location: <location>”
 """
-

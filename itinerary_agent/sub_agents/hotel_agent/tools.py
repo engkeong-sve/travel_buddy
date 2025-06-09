@@ -3,8 +3,8 @@ import serpapi
 from serpapi import GoogleSearch
 import os
 
-def search_hotel(location: str, check_in_date: str, check_out_date: str,
-                  adults: int, children: int, rooms: int, tool_context: ToolContext): #, min_price: int, max_price: int):
+def hotel_search(location: str, check_in_date: str, check_out_date: str,
+                  adults: int, children: int, rooms: int, tool_context: ToolContext):
     '''
     Find hotels using the Google Hotels engine.
     
@@ -19,9 +19,6 @@ def search_hotel(location: str, check_in_date: str, check_out_date: str,
     Returns:
         dict: Hotel search results.
     '''
-    # --min_price (int): User-defined acceptable minimum price of the hotel. Default as None if not specified.
-    # --max_price (int): User-defined acceptable maximum price of the hotel. Default as None if not specified.
-
 
     params = {
         'api_key': os.environ.get('SERPAPI_API_KEY'),
@@ -37,12 +34,8 @@ def search_hotel(location: str, check_in_date: str, check_out_date: str,
         'rooms': rooms,
         'sort_by': 8,
         'hotel_class': None,
-        # 'min_price': min_price,
-        # 'max_price': max_price,
     }
 
-    # search = serpapi.search(params)
-    # results = search.data
     try:
         search = GoogleSearch(params)
         results = search.get_dict()
@@ -56,3 +49,4 @@ def search_hotel(location: str, check_in_date: str, check_out_date: str,
                 'status': 'failed',
                 'error_msg': e,
             }
+        

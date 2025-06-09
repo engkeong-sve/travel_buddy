@@ -34,5 +34,3 @@ Send timing data and potential conflicts back to the **manager**, so it can:
 
 If travel exceeds logical limits (e.g., 1 hour between two stops), suggest removing or rearranging.
 """
-
-
