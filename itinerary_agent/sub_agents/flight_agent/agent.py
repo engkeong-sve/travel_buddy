@@ -3,13 +3,19 @@
 import os
 import datetime
 from google.adk import Agent
+from google.genai import types
 from .tools import flight_search
 
+
+config = types.GenerateContentConfig(
+    temperature=os.environ.get('LLM_TEMPERATURE', 0.7),
+)
 
 flight_agent = Agent(
     name="flight_agent",
     model=os.environ.get('LLM_MODEL'),
     description="Flight agent for finding available flights based on user queries.",
+    generate_content_config=config,
     instruction=f"""You are a helpful travel assistant who can help to check on the exact flight for the user.
     You can check with users if the details are not sufficient to find a flight.
     You must strictly follow the Key Constraints and Output Format provided below.

@@ -1,14 +1,20 @@
 
 import os
-from google.adk import Agent
 import datetime
+from google.adk import Agent
+from google.genai import types
 from .tools import hotel_search
 
+
+config = types.GenerateContentConfig(
+    temperature=os.environ.get('LLM_TEMPERATURE', 0.7),
+)
 
 hotel_agent = Agent(
     name="hotel_agent",
     model=os.environ.get('LLM_MODEL'),
     description="Tool agent",
+    generate_content_config=config,
     instruction=f"""
     You are a helpful travel assistant who can help to check on the exact accommodation for the user.
     You can check with users if the details are not sufficient to find a hotel.

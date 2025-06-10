@@ -4,6 +4,7 @@ Agent module for managing itinerary generation using Google ADK tools.
 import os
 from google.adk.agents.llm_agent import Agent
 from google.adk.tools.agent_tool import AgentTool
+from google.genai import types
 
 from . import prompt
 from .sub_agents.flight_agent.agent import flight_agent
@@ -17,10 +18,15 @@ from .tools.tools import send_email, add_user_todo_item, remove_user_todo_item, 
     get_user_todo_list
 
 
+config = types.GenerateContentConfig(
+    temperature=os.environ.get('LLM_TEMPERATURE', 0.7),
+)
+
 root_agent = Agent(
     name="manager",
     model=os.environ.get('LLM_MODEL'),
     description="Creates a travel itinerary based on user preferences",
+    generate_content_config=config,
     instruction=prompt.MANAGER_AGENT_PROMPT,
     tools=[
         AgentTool(hotel_agent),
