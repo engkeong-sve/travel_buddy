@@ -14,8 +14,8 @@ from .sub_agents.restaurant_agent.agent import restaurant_agent
 from .sub_agents.routing_agent.agent import routing_agent
 from .sub_agents.template_agent.agent import template_agent
 from .sub_agents.weather_agent.agent import weather_agent
-from .tools.tools import send_email, add_user_todo_item, remove_user_todo_item, \
-    get_user_todo_list
+from .tools.tools import send_email, add_user_reminder_item, remove_user_reminder_item, \
+    get_user_reminder_list
 
 
 config = types.GenerateContentConfig(
@@ -37,8 +37,8 @@ root_agent = Agent(
         AgentTool(template_agent, skip_summarization=True),
         AgentTool(weather_agent, skip_summarization=True),
         send_email,
-        add_user_todo_item,
-        remove_user_todo_item,
-        get_user_todo_list,
+        add_user_reminder_item,
+        remove_user_reminder_item,
+        get_user_reminder_list,
     ],
 )

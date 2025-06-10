@@ -46,68 +46,68 @@ def send_email(to_email: str, subject: str, html_body: str) -> bool:
         return False
     
     
-def add_user_todo_item(todo_title: str, todo_item: str, tool_context: ToolContext) -> bool:
+def add_user_reminder_item(reminder_title: str, reminder_item: str, tool_context: ToolContext) -> bool:
     """
-    Adds a todo item to the user's todo list in the tool context.
+    Adds a reminder item to the user's reminder list in the tool context.
 
     Args:
-        todo_title (str): Title of the todo item.
-        todo_item (str): Description of the todo item.
+        reminder_title (str): Title of the reminder item.
+        reminder_item (str): Description of the reminder item.
         tool_context (ToolContext): Context object to store state and results.
 
     Returns:
         bool: True if the item was added successfully, False otherwise.
     """
     try:
-        if 'todo_list' not in tool_context.state:
-            tool_context.state['todo_list'] = []
+        if 'reminder_list' not in tool_context.state:
+            tool_context.state['reminder_list'] = []
 
-        tool_context.state['todo_list'].append({
-            'title': todo_title,
-            'item': todo_item,
+        tool_context.state['reminder_list'].append({
+            'title': reminder_title,
+            'item': reminder_item,
             'timestamp': datetime.datetime.now()
         })
-        print("✅ Todo item added successfully.")
+        print("✅ Reminder item added successfully.")
         return True
 
     except Exception as e:
-        print("❌ Failed to add todo item:", str(e))
+        print("❌ Failed to add reminder item:", str(e))
         return False
     
-def remove_user_todo_item(todo_title: str, tool_context: ToolContext) -> bool:
+def remove_user_reminder_item(reminder_title: str, tool_context: ToolContext) -> bool:
     """
-    Removes a todo item from the user's todo list in the tool context.
+    Removes a reminder item from the user's reminder list in the tool context.
 
     Args:
-        todo_title (str): Title of the todo item to remove.
+        reminder_title (str): Title of the reminder item to remove.
         tool_context (ToolContext): Context object to store state and results.
 
     Returns:
         bool: True if the item was removed successfully, False otherwise.
     """
     try:
-        if 'todo_list' in tool_context.state:
-            tool_context.state['todo_list'] = [
-                item for item in tool_context.state['todo_list'] if item['title'] != todo_title
+        if 'reminder_list' in tool_context.state:
+            tool_context.state['reminder_list'] = [
+                item for item in tool_context.state['reminder_list'] if item['title'] != reminder_title
             ]
-            print("✅ Todo item removed successfully.")
+            print("✅ Reminder item removed successfully.")
             return True
         else:
-            print("❌ Todo list is empty.")
+            print("❌ Reminder list is empty.")
             return False
 
     except Exception as e:
-        print("❌ Failed to remove todo item:", str(e))
+        print("❌ Failed to remove reminder item:", str(e))
         return False
     
-def get_user_todo_list(tool_context: ToolContext) -> list:
+def get_user_reminder_list(tool_context: ToolContext) -> list:
     """
-    Retrieves the user's todo list from the tool context.
+    Retrieves the user's reminder list from the tool context.
 
     Args:
         tool_context (ToolContext): Context object to store state and results.
 
     Returns:
-        list: The user's todo list, or an empty list if no items exist.
+        list: The user's reminder list, or an empty list if no items exist.
     """
-    return tool_context.state.get('todo_list', [])
+    return tool_context.state.get('reminder_list', [])
