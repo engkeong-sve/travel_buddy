@@ -57,5 +57,6 @@ def flight_search(
         return {
             'status': 'failed',
             'error_msg': e,
+            # 'error_msg': str(e)
         }
         
