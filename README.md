@@ -26,6 +26,10 @@ LLM_MODEL=gemini-2.0-flash
 LLM_TEMPERATURE=0.1
 GOOGLE_API_KEY=<YOUR_GOOGLE_API_KEY>
 SERPAPI_API_KEY=<YOUR_SERPAPI_API_KEY>
+
+<!-- SMTP Configuration -->
+EMAIL_ADDRESS=your_gmail_app_password
+EMAIL_APP_PASSWORD=your_gmail_app_password
 ```
 
 ### Install Requirements
