@@ -28,7 +28,7 @@ GOOGLE_API_KEY=<YOUR_GOOGLE_API_KEY>
 SERPAPI_API_KEY=<YOUR_SERPAPI_API_KEY>
 
 <!-- SMTP Configuration -->
-EMAIL_ADDRESS=your_gmail_app_password
+EMAIL_ADDRESS=your_gmail_address
 EMAIL_APP_PASSWORD=your_gmail_app_password
 ```
 
