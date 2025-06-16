@@ -5,15 +5,17 @@ import datetime
 from google.adk import Agent
 from google.genai import types
 from .tools import flight_search
+from dotenv import load_dotenv
 
+load_dotenv()  # load .env file
 
 config = types.GenerateContentConfig(
-    temperature=os.environ.get('LLM_TEMPERATURE', 0.7),
+    temperature=float(os.getenv('LLM_TEMPERATURE', 0.7)),
 )
 
 flight_agent = Agent(
     name="flight_agent",
-    model=os.environ.get('LLM_MODEL'),
+    model=os.getenv('LLM_MODEL'),
     description="Flight agent for finding available flights based on user queries.",
     generate_content_config=config,
     instruction=f"""You are a helpful flight agent who can help to find available flights based on user queries.

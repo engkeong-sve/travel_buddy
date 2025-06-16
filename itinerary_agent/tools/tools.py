@@ -4,7 +4,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import datetime
 from google.adk.tools import ToolContext
+from dotenv import load_dotenv
 
+load_dotenv()  # load .env file
 
 
 def send_email(to_email: str, subject: str, html_body: str) -> bool:

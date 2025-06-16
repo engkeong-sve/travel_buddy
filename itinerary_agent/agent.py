@@ -5,6 +5,7 @@ import os
 from google.adk.agents.llm_agent import Agent
 from google.adk.tools.agent_tool import AgentTool
 from google.genai import types
+from dotenv import load_dotenv
 
 from . import prompt
 from .sub_agents.flight_agent.agent import flight_agent
@@ -18,13 +19,15 @@ from .tools.tools import send_email, add_user_reminder_item, remove_user_reminde
     get_user_reminder_list
 
 
+load_dotenv()  # load .env file
+
 config = types.GenerateContentConfig(
-    temperature=os.environ.get('LLM_TEMPERATURE', 0.7),
+    temperature=float(os.getenv('LLM_TEMPERATURE', 0.7)),
 )
 
 root_agent = Agent(
     name="manager",
-    model=os.environ.get('LLM_MODEL'),
+    model=os.getenv('LLM_MODEL'),
     description="Creates a travel itinerary based on user preferences",
     generate_content_config=config,
     instruction=prompt.MANAGER_AGENT_PROMPT,
@@ -42,3 +45,4 @@ root_agent = Agent(
         get_user_reminder_list,
     ],
 )
+

@@ -2,6 +2,10 @@
 import os
 from serpapi import GoogleSearch
 from google.adk.tools import ToolContext
+from dotenv import load_dotenv
+
+load_dotenv() 
+
 
 def flight_search(
     departure_id: str,
@@ -25,7 +29,7 @@ def flight_search(
         tool_context (ToolContext): Context object to store state and results.
     """
     params = {
-        'api_key': os.environ.get('SERPAPI_API_KEY'),
+        'api_key': os.getenv('SERPAPI_API_KEY'),
         'engine': 'google_flights',
         'hl': 'en',
         'departure_id': departure_id,
@@ -56,7 +60,6 @@ def flight_search(
     except Exception as e:
         return {
             'status': 'failed',
-            'error_msg': e,
-            # 'error_msg': str(e)
+            'error_msg': str(e),
         }
         

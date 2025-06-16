@@ -3,16 +3,18 @@ import os
 import datetime
 from google.adk import Agent
 from google.genai import types
+from dotenv import load_dotenv
 from .tools import hotel_search
 
+load_dotenv()  # load .env file
 
 config = types.GenerateContentConfig(
-    temperature=os.environ.get('LLM_TEMPERATURE', 0.7),
+    temperature=float(os.getenv('LLM_TEMPERATURE', 0.7)),
 )
 
 hotel_agent = Agent(
     name="hotel_agent",
-    model=os.environ.get('LLM_MODEL'),
+    model=os.getenv('LLM_MODEL'),
     description="Tool agent",
     generate_content_config=config,
     instruction=f"""

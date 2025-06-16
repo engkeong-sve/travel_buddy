@@ -1,6 +1,9 @@
 import os
 from google.adk.tools import ToolContext
 from serpapi import GoogleSearch
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 
 def hotel_search(location: str, check_in_date: str, check_out_date: str,
@@ -21,7 +24,7 @@ def hotel_search(location: str, check_in_date: str, check_out_date: str,
     '''
 
     params = {
-        'api_key': os.environ.get('SERPAPI_API_KEY'),
+        'api_key': os.getenv('SERPAPI_API_KEY'),
         'engine': 'google_hotels',
         'hl': 'en',
         'gl': 'us',
