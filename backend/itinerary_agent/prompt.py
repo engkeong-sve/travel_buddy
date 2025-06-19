@@ -115,6 +115,7 @@ Ensure the trip start date is **today or later**; if it's earlier, inform the us
     - Schedule outdoor attractions on good-weather days
     - Move indoor attractions to rainy days
   - Use `routing_agent` to confirm travel time and order stops efficiently
+  - Use `packing_agent` to create a packing list based on the trip itinerary (i.e. plan the number of outfit required based on number of days), attraction spots and weather.
   - Adjust activity duration and add buffer times as needed
 
 ### a. Check Feasibility
@@ -142,11 +143,7 @@ Ensure the trip start date is **today or later**; if it's earlier, inform the us
 - Identify affected components, revise only necessary agents, rebalance schedule, and validate routes and feasibility again.
 - If the change affects multiple components, you may go back to the step 3 and revalidate the entire itinerary.
 
-## 9. Include Packing List
-- Call `packing_agent` to generate a travel items list.
-- Do not show the packing list directly to the users. The packing list only should be shown when presenting finalized itinerary.
-
-## 10. Final Delivery
+## 9. Final Delivery
 - Present the finalized itinerary to the user, strictly following the `formatting` section.
   > "Here is your finalized travel itinerary for [Destination] from [Start Date] to [End Date]. Please review it and let me know if everything looks good."
 - After presenting the finalized itinerary, ask the user:
