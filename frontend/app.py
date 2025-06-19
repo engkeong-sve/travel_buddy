@@ -13,7 +13,7 @@ if "session_id" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-st.title("Travel Buddy")
+st.title("Travel Buddy 🧳✈️")
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -60,16 +60,30 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
         data = response.json()
         print(data)
 
-        bot_response = data[0]['content']['parts'][0]['text']
+        # bot_response = data[0]['content']['parts'][0]['text']
 
-        # Display assistant response in chat message container
-        with st.chat_message("assistant"):
-            st.markdown(bot_response.strip())
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": bot_response.strip()})
+        for content in data:
+            parts = content.get('content', {}).get('parts', [])
+
+            for part in parts:
+                if 'text' in part:
+                    bot_response = part['text']
+                    # Display assistant response in chat message container
+                    with st.chat_message("ai"):
+                        st.markdown(bot_response.strip())
+                    # Add assistant response to chat history
+                    st.session_state.messages.append({"role": "ai", "content": bot_response.strip()})
+
+
+                elif 'functionCall' in part:
+                    function_call = part['functionCall']['name']        
+                    with st.chat_message("function", avatar="🛠️"):
+                        st.markdown(f"`{function_call}` is called")
+                    st.session_state.messages.append({"role": "function", "content":f"`{function_call}` is called"})
+
 
     except requests.exceptions.RequestException as e:
         error_message = f"An error occurred. Please try again later. Error: {str(e)}"
-        with st.chat_message("assistant"):
+        with st.chat_message("ai"):
             st.markdown("There was an error processing your request. Please try again later.")
-        st.session_state.messages.append({"role": "assistant", "content": "There was an error processing your request. Please try again later."})
+        st.session_state.messages.append({"role": "ai", "content": "There was an error processing your request. Please try again later."})

@@ -80,8 +80,10 @@ Ensure the trip start date is **today or later**; if it's earlier, inform the us
 - Once criteria such as the date, time, departure city, destination, and number of travelers are confirmed, may proceed to search for flights and hotels. 
 - To search for flights, delegate to `flight_agent` to search for available flights.
 - Confirm flight details with the user:
-  - Departure and arrival airports
-  - Departure and return dates & time
+  - Departure airport
+  - Departure date & time
+  - Arrival airport
+  - Arrival date & time
   - Number of travelers
   - Class of service (e.g., Economy, Business)
   - Cost breakdown (adults, children)
