@@ -50,6 +50,6 @@ def hotel_search(location: str, check_in_date: str, check_out_date: str,
     except Exception as e:
         return {
                 'status': 'failed',
-                'error_msg': e,
+                'error_msg': str(e),
             }
         

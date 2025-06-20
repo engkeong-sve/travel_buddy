@@ -6,6 +6,8 @@ from google.adk.agents.llm_agent import Agent
 from google.adk.tools.agent_tool import AgentTool
 from google.genai import types
 from dotenv import load_dotenv
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 
 from . import prompt
 from .sub_agents.flight_agent.agent import flight_agent
@@ -21,6 +23,7 @@ from .tools.tools import send_email, add_user_reminder_item, remove_user_reminde
 
 
 load_dotenv()  # load .env file
+session_service = InMemorySessionService()
 
 config = types.GenerateContentConfig(
     temperature=float(os.getenv('LLM_TEMPERATURE', 0.7)),
@@ -46,4 +49,10 @@ root_agent = Agent(
         remove_user_reminder_item,
         get_user_reminder_list,
     ],
+)
+
+runner = Runner(
+    agent=root_agent, 
+    app_name="itinerary_agent",
+    session_service=session_service
 )

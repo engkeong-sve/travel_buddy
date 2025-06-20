@@ -21,15 +21,18 @@ TravelBuddy is your smart, AI-powered travel assistant that helps you plan, orga
 
 ### Add .env file under root directory
 ```.env
+# Language Model Configuration
 GOOGLE_GENAI_USE_VERTEXAI=FALSE
 LLM_MODEL=gemini-2.5-flash-preview-05-20
 LLM_TEMPERATURE=0.1
-GOOGLE_API_KEY=<YOUR_GOOGLE_API_KEY>
-SERPAPI_API_KEY=<YOUR_SERPAPI_API_KEY>
 
-<!-- SMTP Configuration -->
-EMAIL_ADDRESS=your_gmail_address
-EMAIL_APP_PASSWORD=your_gmail_app_password
+# API Keys
+GOOGLE_API_KEY=<your_google_api_key>
+SERPAPI_API_KEY=<your_serpapi_api_key>
+
+# Email (SMTP) Configuration
+EMAIL_ADDRESS=<your_gmail_address>
+EMAIL_APP_PASSWORD=<your_gmail_app_password>
 ```
 
 ### Install Requirements
@@ -41,6 +44,6 @@ cd travel_buddy
 # Install dependencies
 pip install -r requirements.txt
 
-# Run agent with adk web
-adk web
+# Run the Application
+streamlit run app.py
 ```

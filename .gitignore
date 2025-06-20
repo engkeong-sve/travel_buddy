@@ -177,6 +177,3 @@ cython_debug/
 
 .DS_Store
 note.md
-
-# For ui testing
-frontend 
