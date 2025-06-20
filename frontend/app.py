@@ -2,43 +2,72 @@ import streamlit as st
 import requests
 import os
 import uuid 
+import base64
+from PIL import Image
 
-BACKEND_URL = os.getenv('BACKEND_URL',"http://127.0.0.1:8000")
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="Travel Buddy",
+    page_icon="✈️",
+    layout="centered"
+)
 
-st.set_page_config(page_title="Travel Buddy", layout="centered")
+# --- Constants ---
+BACKEND_URL = os.getenv('BACKEND_URL', "https://adk-backend-739491611445.asia-southeast1.run.app")
 
+# --- CSS Loader ---
+def load_css(file_path):
+    with open(file_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+load_css("style.css")
+
+image_path = "assets/travel_buddy_logo.png"
+
+if os.path.exists(image_path):
+    st.markdown(f"""
+        <div style="display: flex; align-items: center; justify-content: center; gap: 2rem; margin-top: 2rem;">
+            <img src="data:image/png;base64,{base64.b64encode(open(image_path, "rb").read()).decode()}" width="80">
+            <h1 style="color: #FFD700; margin: 0;">Travel Buddy 🧳✈️</h1>
+        </div>
+    """, unsafe_allow_html=True)
+else:
+    st.error("Logo not found!")
+
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+
+# --- Session State Initialization ---
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-st.title("Travel Buddy 🧳✈️")
-
+# --- Display Chat History ---
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+# --- Chat Input ---
 if user_input := st.chat_input("Hey! How can I assist you to craft a perfect travel itinerary?"):
-    # Display user message in chat message container
     st.chat_message("user").markdown(user_input)
-
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": user_input})
 
     session_id = st.session_state.session_id
 
-    first_payload = {
-        "name": "test",
-    }
 
-    response = requests.post(
+    try:
+        requests.post(
             f"{BACKEND_URL}/apps/itinerary_agent/users/user_001/sessions/{session_id}",
-            json=first_payload,
+            json={"name": "test"},
             headers={"Content-Type": "application/json"}
-    )
+        )
+    except requests.exceptions.RequestException:
+        pass  # Non-critical; continue regardless
 
-    # Prepare API request payload
+    # --- Send Chat Message to Backend ---
     payload = {
         "appName": "itinerary_agent",
         "userId": "user_001",
@@ -49,41 +78,38 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
         }
     }
 
-    # Send the request to the API
     try:
         response = requests.post(
             f"{BACKEND_URL}/run",
             json=payload,
             headers={"Content-Type": "application/json"}
         )
-        # response.raise_for_status()  # Raise an error for bad status codes
         data = response.json()
-        print(data)
-
-        # bot_response = data[0]['content']['parts'][0]['text']
 
         for content in data:
             parts = content.get('content', {}).get('parts', [])
-
             for part in parts:
                 if 'text' in part:
-                    bot_response = part['text']
-                    # Display assistant response in chat message container
+                    bot_response = part['text'].strip()
                     with st.chat_message("ai"):
-                        st.markdown(bot_response.strip())
-                    # Add assistant response to chat history
-                    st.session_state.messages.append({"role": "ai", "content": bot_response.strip()})
-
+                        st.markdown(bot_response)
+                    st.session_state.messages.append({"role": "ai", "content": bot_response})
 
                 elif 'functionCall' in part:
-                    function_call = part['functionCall']['name']        
+                    function_call = part['functionCall']['name']
                     with st.chat_message("function", avatar="🛠️"):
                         st.markdown(f"`{function_call}` is called")
-                    st.session_state.messages.append({"role": "function", "content":f"`{function_call}` is called"})
-
+                    st.session_state.messages.append({"role": "function", "content": f"`{function_call}` is called"})
 
     except requests.exceptions.RequestException as e:
-        error_message = f"An error occurred. Please try again later. Error: {str(e)}"
+        error_msg = "There was an error processing your request. Please try again later."
         with st.chat_message("ai"):
-            st.markdown("There was an error processing your request. Please try again later.")
-        st.session_state.messages.append({"role": "ai", "content": "There was an error processing your request. Please try again later."})
+            st.markdown(error_msg)
+        st.session_state.messages.append({"role": "ai", "content": error_msg})
+
+# --- Footer ---
+st.markdown("""
+    <div class="footer">
+        ✈️ Travel Buddy &copy; 2025 — From start to end, we are your friend!
+    </div>
+""", unsafe_allow_html=True)
