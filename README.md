@@ -2,7 +2,7 @@
 
 **From start to end, we’re your friend.**
 
-TravelBuddy is your smart, AI-powered travel assistant that helps you plan, organize, and enjoy your trips — stress-free. Whether you’re hopping between cities or exploring hidden gems, TravelBuddy’s got your back!
+TravelBuddy is your smart, AI-powered travel assistant that helps you plan, organize, and enjoy your trips — stress-free. Whether you’re hopping between cities or exploring hidden gems, Travel Buddy’s got your back!
 
 ---
 
