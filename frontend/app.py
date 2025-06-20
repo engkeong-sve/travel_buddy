@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # --- Constants ---
-BACKEND_URL = os.getenv('BACKEND_URL', "https://adk-backend-739491611445.asia-southeast1.run.app")
+BACKEND_URL = os.getenv('BACKEND_URL', "http://localhost:8000")
 
 # --- CSS Loader ---
 def load_css(file_path):
