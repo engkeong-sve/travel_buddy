@@ -5,6 +5,8 @@ import uuid
 import base64
 from PIL import Image
 from dotenv import load_dotenv
+import random
+from waiting_msg import WAITING_MSG 
 
 load_dotenv()
 
@@ -40,10 +42,8 @@ else:
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-
 if "user_id" not in st.session_state:
     st.session_state.user_id = "user_" + str(uuid.uuid4())
-    # st.session_state.user_id = "user_" + "123"
 
 # --- Session State Initialization ---
 if "session_id" not in st.session_state:
@@ -78,48 +78,51 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
     user_id = st.session_state.user_id
     session_id = st.session_state.session_id
 
-    # --- Send Chat Message to Backend ---
-    payload = {
-        "appName": "itinerary_agent",
-        "userId": user_id,
-        "sessionId": session_id,
-        "newMessage": {
-            "role": "user",
-            "parts": [{"text": user_input}]
+    # Display loading spinner with a random dad joke
+    random_joke = random.choice(WAITING_MSG)
+    with st.spinner(f"{random_joke}"):
+        # --- Send Chat Message to Backend ---
+        payload = {
+            "appName": "itinerary_agent",
+            "userId": user_id,
+            "sessionId": session_id,
+            "newMessage": {
+                "role": "user",
+                "parts": [{"text": user_input}]
+            }
         }
-    }
 
-    try:
-        print("posting to backend", payload)
-        response = requests.post(
-            f"{BACKEND_URL}/run",
-            json=payload,
-            headers={"Content-Type": "application/json"}
-        )
-        data = response.json()
+        try:
+            print("posting to backend", payload)
+            response = requests.post(
+                f"{BACKEND_URL}/run",
+                json=payload,
+                headers={"Content-Type": "application/json"}
+            )
+            data = response.json()
 
-        print("response from backend", data)
-        for content in data:
-            parts = content.get('content', {}).get('parts', [])
-            for part in parts:
-                if 'text' in part:
-                    bot_response = part['text'].strip()
-                    with st.chat_message("ai"):
-                        st.markdown(bot_response)
-                    st.session_state.messages.append({"role": "ai", "content": bot_response})
+            print("response from backend", data)
+            for content in data:
+                parts = content.get('content', {}).get('parts', [])
+                for part in parts:
+                    if 'text' in part:
+                        bot_response = part['text'].strip()
+                        with st.chat_message("ai"):
+                            st.markdown(bot_response)
+                        st.session_state.messages.append({"role": "ai", "content": bot_response})
 
-                elif 'functionCall' in part:
-                    function_call = part['functionCall']['name']
-                    with st.chat_message("function", avatar="🛠️"):
-                        st.markdown(f"`{function_call}` is called")
-                    st.session_state.messages.append({"role": "function", "content": f"`{function_call}` is called"})
+                    elif 'functionCall' in part:
+                        function_call = part['functionCall']['name']
+                        with st.chat_message("function", avatar="🛠️"):
+                            st.markdown(f"`{function_call}` is called")
+                        st.session_state.messages.append({"role": "function", "content": f"`{function_call}` is called"})
 
-    except requests.exceptions.RequestException as e:
-        print(f"Error: {e}")
-        error_msg = "There was an error processing your request. Please try again later."
-        with st.chat_message("ai"):
-            st.markdown(error_msg)
-        st.session_state.messages.append({"role": "ai", "content": error_msg})
+        except requests.exceptions.RequestException as e:
+            print(f"Error: {e}")
+            error_msg = "There was an error processing your request. Please try again later."
+            with st.chat_message("ai"):
+                st.markdown(error_msg)
+            st.session_state.messages.append({"role": "ai", "content": error_msg})
 
 # --- Footer ---
 st.markdown("""
