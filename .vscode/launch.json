@@ -15,8 +15,19 @@
       "name": "Debug ADK Web",
       "type": "debugpy",
       "request": "launch",
+      "cwd": "${workspaceFolder}/backend/itinerary-agent",
       "program": "${workspaceFolder}/.venv/bin/adk",
       "args": ["web"],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Debug ADK api_server",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend/itinerary-agent",
+      "program": "${workspaceFolder}/.venv/bin/adk",
+      "args": ["api_server"],
       "console": "integratedTerminal",
       "justMyCode": false
     }
