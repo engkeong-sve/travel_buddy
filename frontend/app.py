@@ -1,11 +1,11 @@
 import streamlit as st
 import requests
 import os
+import random
 import uuid 
 import base64
 from PIL import Image
 from dotenv import load_dotenv
-import random
 from waiting_msg import WAITING_MSG 
 
 load_dotenv()
