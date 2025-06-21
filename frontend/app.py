@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # --- Constants ---
-BACKEND_URL = os.getenv('BACKEND_URL', "http://localhost:8000")
+BACKEND_URL = os.getenv('BACKEND_URL')
 
 # --- CSS Loader ---
 def load_css(file_path):
