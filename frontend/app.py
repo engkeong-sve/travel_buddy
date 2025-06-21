@@ -57,16 +57,6 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
 
     session_id = st.session_state.session_id
 
-
-    try:
-        requests.post(
-            f"{BACKEND_URL}/apps/itinerary_agent/users/user_001/sessions/{session_id}",
-            json={"name": "test"},
-            headers={"Content-Type": "application/json"}
-        )
-    except requests.exceptions.RequestException:
-        pass  # Non-critical; continue regardless
-
     # --- Send Chat Message to Backend ---
     payload = {
         "appName": "itinerary_agent",
