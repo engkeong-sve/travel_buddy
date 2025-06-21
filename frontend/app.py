@@ -38,6 +38,9 @@ else:
 st.markdown("</div>", unsafe_allow_html=True)
 
 
+if "user_id" not in st.session_state:
+    st.session_state.user_id = "user_" + str(uuid.uuid4())
+
 # --- Session State Initialization ---
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())
@@ -55,12 +58,13 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
     st.chat_message("user").markdown(user_input)
     st.session_state.messages.append({"role": "user", "content": user_input})
 
+    user_id = st.session_state.user_id
     session_id = st.session_state.session_id
 
     # --- Send Chat Message to Backend ---
     payload = {
         "appName": "itinerary_agent",
-        "userId": "user_001",
+        "userId": user_id,
         "sessionId": session_id,
         "newMessage": {
             "role": "user",
