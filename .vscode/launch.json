@@ -30,6 +30,16 @@
       "args": ["api_server"],
       "console": "integratedTerminal",
       "justMyCode": false
+    },
+    {
+      "name": "Debug frontend",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/frontend",
+      "program": "${workspaceFolder}/.venv/bin/streamlit",
+      "args": ["run", "app.py"],
+      "console": "integratedTerminal",
+      "justMyCode": false
     }
   ]
 }

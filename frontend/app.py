@@ -4,6 +4,9 @@ import os
 import uuid 
 import base64
 from PIL import Image
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -40,10 +43,24 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 if "user_id" not in st.session_state:
     st.session_state.user_id = "user_" + str(uuid.uuid4())
+    # st.session_state.user_id = "user_" + "123"
 
 # --- Session State Initialization ---
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())
+    
+    user_id = st.session_state.user_id
+    session_id = st.session_state.session_id
+    
+    try:
+        requests.post(
+            f"{BACKEND_URL}/apps/itinerary_agent/users/{user_id}/sessions/{session_id}",
+            json={},
+            headers={"Content-Type": "application/json"}
+        )
+    except requests.exceptions.RequestException as e:
+        print(f"Error initializing session: {e}")
+        st.error("Failed to initialize session. Please try again later.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -73,6 +90,7 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
     }
 
     try:
+        print("posting to backend", payload)
         response = requests.post(
             f"{BACKEND_URL}/run",
             json=payload,
@@ -80,6 +98,7 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
         )
         data = response.json()
 
+        print("response from backend", data)
         for content in data:
             parts = content.get('content', {}).get('parts', [])
             for part in parts:
@@ -96,6 +115,7 @@ if user_input := st.chat_input("Hey! How can I assist you to craft a perfect tra
                     st.session_state.messages.append({"role": "function", "content": f"`{function_call}` is called"})
 
     except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
         error_msg = "There was an error processing your request. Please try again later."
         with st.chat_message("ai"):
             st.markdown(error_msg)
