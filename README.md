@@ -23,7 +23,7 @@ TravelBuddy is your smart, AI-powered travel assistant that helps you plan, orga
 ```.env
 # Language Model Configuration
 GOOGLE_GENAI_USE_VERTEXAI=FALSE
-LLM_MODEL=gemini-2.5-flash-preview-05-20
+LLM_MODEL=gemini-2.5-flash
 LLM_TEMPERATURE=0.1
 
 # API Keys

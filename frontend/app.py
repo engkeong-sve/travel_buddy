@@ -20,6 +20,8 @@ st.set_page_config(
 # --- Constants ---
 BACKEND_URL = os.getenv('BACKEND_URL')
 
+print("BACKEND_URL:", BACKEND_URL)
+
 # --- CSS Loader ---
 def load_css(file_path):
     with open(file_path) as f:
