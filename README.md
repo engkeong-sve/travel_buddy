@@ -43,7 +43,20 @@ cd travel_buddy
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
-# Run the Application
+### Run Travel Buddy
+
+You may use Git Bash to run the script below to automatically start the application.
+
+```bash
+bash run_travel_buddy.sh
+```
+
+Alternatively, use the command below.
+```bash
+cd backend/itinerary-agent/
+adk api_server
+cd ../../frontend/
 streamlit run app.py
 ```
