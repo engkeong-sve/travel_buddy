@@ -21,9 +21,21 @@ Travel Buddy is your smart, AI-powered travel assistant that helps you plan, org
 
 Travel Buddy is a multi-agent AI system built using Google Agent Development Kit (ADK). It has a manager agent that delegates tasks to multiple sub-agents and tools, ensuring a seamless coordination among the sub-agents to curate a personalized itinerary just for you. 
 
-The sub-agents include: Hotel Agent, Flight Agent, Attraction Spot Agent, Restaurant Agent, Routing Agent, Template Agent, Weather Agent, Packing Agent.
+### List of Sub-Agents
+- 🏨 Hotel Agent
+- ✈️ Flight Agent
+- 🗺️ Attraction Spot Agent
+- 🍽️ Restaurant Agent
+- 🧭 Routing Agent
+- 📄 Template Agent
+- ☀️ Weather Agent
+- 🎒 Packing Agent
 
-The tools include: Send Email, Add User Reminder Item, Receive User Reminder Item, Get User Reminder List.
+### List of Tools
+- 📧 Send Email
+- ⏰ Add User Reminder Item
+- 📥 Receive User Reminder Item
+- 📝 Get User Reminder List
 
 ---
 
